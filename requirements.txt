@@ -6,4 +6,4 @@ matplotlib
 seaborn
 pillow
 gdown
-streamlit==1.61.0
+streamlit
