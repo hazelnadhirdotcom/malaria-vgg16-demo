@@ -216,7 +216,7 @@ with kol_kiri:
 
     if file_upload is not None:
         gambar_pil = Image.open(file_upload).convert("RGB")
-        st.image(gambar_pil, caption="Gambar yang diupload", use_container_width=True)
+        st.image(gambar_pil, caption="Gambar yang diupload")
 
 with kol_kanan:
     st.markdown("#### 🧪 Hasil Deteksi")
