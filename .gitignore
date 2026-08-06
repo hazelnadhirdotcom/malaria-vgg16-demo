@@ -1,0 +1,8 @@
+.venv-gpu/
+.venv/
+dataset/
+outputs/models/
+src/__pycache__/
+__pycache__/
+model_cache/
+*.pyc
