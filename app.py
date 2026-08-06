@@ -53,7 +53,30 @@ st.markdown("""
         font-size: 15px;
     }
 
-    /* Sidebar */
+    /* Paksa semua teks di halaman utama jadi gelap dan jelas */
+    .stApp, .stApp p, .stApp span, .stApp label, .stApp div {
+        color: #0f172a;
+    }
+    .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5 {
+        color: #0f172a !important;
+    }
+    .header-container h1, .header-container p {
+        color: white !important;
+    }
+    .header-container p {
+        color: #dbeafe !important;
+    }
+
+    /* Kotak info bawaan Streamlit (saat belum upload gambar) */
+    div[data-testid="stAlertContainer"] p {
+        color: #1e3a8a !important;
+        font-weight: 500;
+    }
+
+    /* Teks caption/kecil */
+    .stApp [data-testid="stCaptionContainer"] {
+        color: #475569 !important;
+    }
     section[data-testid="stSidebar"] {
         background-color: #eff6ff;
     }
