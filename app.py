@@ -143,6 +143,23 @@ st.markdown("""
         padding-top: 16px;
         border-top: 1px solid #e5e7eb;
     }
+
+    /* Bagian perbandingan preprocessing */
+    .banding-title {
+        color: #1e3a8a !important;
+        font-weight: 700;
+        margin-top: 8px;
+        margin-bottom: 4px;
+    }
+    .banding-caption {
+        text-align: center;
+        font-weight: 600;
+        color: #1e3a8a;
+        margin-top: 8px;
+        padding: 6px;
+        background-color: #eff6ff;
+        border-radius: 8px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -225,7 +242,8 @@ with kol_kanan:
         st.info("Upload gambar sel darah di sebelah kiri untuk memulai deteksi.")
     else:
         gambar_np = np.array(gambar_pil)
-        gambar_bgr = cv2.cvtColor(gambar_np, cv2.COLOR_RGB2BGR)
+        gambar_bgr_asli = cv2.cvtColor(gambar_np, cv2.COLOR_RGB2BGR)
+        gambar_bgr = gambar_bgr_asli.copy()
 
         if pilihan_model != "Model A (tanpa preprocessing)":
             gambar_bgr = terapkan_clahe(gambar_bgr)
@@ -253,6 +271,24 @@ with kol_kanan:
                     <p>Tingkat keyakinan model: <b>{(1-prediksi)*100:.1f}%</b></p>
                 </div>
                 """, unsafe_allow_html=True)
+
+# ======================================================
+# PERBANDINGAN SEBELUM VS SESUDAH PREPROCESSING
+# ======================================================
+if file_upload is not None and pilihan_model != "Model A (tanpa preprocessing)":
+    st.markdown("---")
+    st.markdown("#### 🔬 Perbandingan Sebelum & Sesudah Preprocessing")
+    st.caption("Menampilkan efek CLAHE (peningkatan kontras) dan Gamma Correction (koreksi pencahayaan) terhadap citra asli.")
+
+    gambar_setelah_rgb = cv2.cvtColor(gambar_bgr, cv2.COLOR_BGR2RGB)
+
+    kol_sebelum, kol_sesudah = st.columns(2, gap="medium")
+    with kol_sebelum:
+        st.image(gambar_pil)
+        st.markdown('<div class="banding-caption">Sebelum Preprocessing</div>', unsafe_allow_html=True)
+    with kol_sesudah:
+        st.image(gambar_setelah_rgb)
+        st.markdown('<div class="banding-caption">Sesudah CLAHE + Gamma Correction</div>', unsafe_allow_html=True)
 
 # ======================================================
 # FOOTER
